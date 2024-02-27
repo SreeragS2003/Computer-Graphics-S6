@@ -1,29 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-char arr[100][100] = {' '};
 
-void circleMidpoint(int xCenter,int yCenter,int radius);
+int arr[40][40] = {0};
 
-void main() {
-    // Example usage
-    circleMidpoint(50, 50, 20);
+void circlePoints (int, int, int, int);
 
-    // Printing the array
-    for (int i = 0; i < 100; i++) {
-        for (int j = 0; j < 100; j++) {
-            printf("%c ", arr[i][j]);
-        }
-        printf("\n");
-    }
-}
-
-void circleMidpoint (int xCenter, int yCenter, int radius){
+void circle (int xCen, int yCen, int radius){
     int x = 0;
     int y = radius;
     int p = 1 - radius;
-    void circlePlotPoints (int, int, int, int);
-    // Plot first set of points 
-    circlePlotPoints (xCenter,yCenter,x,y);
+    circlePoints (xCen,yCen,x,y);
     while (x < y){
         x++ ;
         if (p<0)
@@ -32,16 +18,27 @@ void circleMidpoint (int xCenter, int yCenter, int radius){
             y--;
             p+=2*(x-y) + 1;
         }
-        circlePlotPoints(xCenter,yCenter,x,y);
+        circlePoints(xCen,yCen,x,y);
     }
 }
-void circlePlotPoints(int xCenter, int yCenter, int x, int y){
-    arr[xCenter + x][yCenter + y]='.';
-    arr[xCenter - x][yCenter + y]='.';
-    arr[xCenter + x][yCenter - y]='.';
-    arr[xCenter - x][yCenter - y]='.';
-    arr[xCenter + y][yCenter + x]='.';
-    arr[xCenter - y][yCenter + x]='.';
-    arr[xCenter + y][yCenter - x]='.';
-    arr[xCenter - y][yCenter - x]='.';
+
+void circlePoints(int xCen, int yCen, int x, int y){
+    arr[xCen + x][yCen + y]=1;
+    arr[xCen - x][yCen + y]=1;
+    arr[xCen + x][yCen - y]=1;
+    arr[xCen - x][yCen - y]=1;
+    arr[xCen + y][yCen + x]=1;
+    arr[xCen - y][yCen + x]=1;
+    arr[xCen + y][yCen - x]=1;
+    arr[xCen - y][yCen - x]=1;
+}
+
+void main() {
+    circle(20, 20, 10);
+    for (int i = 0; i <40; i++) {
+        for (int j = 0; j < 40; j++) {
+            printf("%c", arr[i][j] ? '.' : ' ');
+        }
+        printf("\n");
+    }
 }
