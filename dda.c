@@ -6,8 +6,13 @@ char arr[30][30] = {' '};
 void lineDDA(int xa, int ya, int xb, int yb);
 
 void main() {
-    // Example usage
-    lineDDA(1, 1, 20,25);
+    int x1, y1, x2, y2;
+
+    printf("Enter coordinates of first point (x1 y1): ");
+    scanf("%d %d", &x1, &y1);
+    printf("Enter coordinates of second point (x2 y2): ");
+    scanf("%d %d", &x2, &y2);
+    lineDDA(x1, y1, x2, y2);
 
     // Printing the array
     for (int i = 0; i < 30; i++) {
@@ -36,5 +41,12 @@ void lineDDA(int xa, int ya, int xb, int yb) {
         x += xIncrement;
         y += yIncrement;
         arr[(int)x][(int)y] = '.';
+    }
+    printf("Coordinates of marked points:\n");
+    for (int i = 0; i < 30; i++) {
+        for (int j = 0; j < 30; j++) {
+            if (arr[i][j] == '.')
+                printf("x = %d, y = %d\n", i, j);
+        }
     }
 }

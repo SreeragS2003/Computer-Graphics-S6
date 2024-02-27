@@ -5,45 +5,58 @@ char arr[30][30] = {' '};
 
 void linebres(int xa, int ya, int xb, int yb);
 
-void main() {
-    // Example usage
-    linebres(1, 1, 20,25);
+int main() {
+    int x1, y1, x2, y2;
 
-    // Printing the array
+    printf("Enter coordinates of first point (x1 y1): ");
+    scanf("%d %d", &x1, &y1);
+    printf("Enter coordinates of second point (x2 y2): ");
+    scanf("%d %d", &x2, &y2);
+
+    linebres(x1, y1, x2, y2);
+
     for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 30; j++) {
             printf("%c ", arr[i][j]);
         }
         printf("\n");
     }
+
+    return 0;
 }
 
-void linebres (int xa, int ya, int xb, int yb)
-{
-    int dx = abs (xa - xb), dy = abs (ya - yb);
+void linebres(int xa, int ya, int xb, int yb) {
+    int dx = abs(xa - xb), dy = abs(ya - yb);
     int p = 2 * dy - dx;
-    int twoDy = 2*dy, twoDyDx = 2*(dy - dx);
+    int twoDy = 2 * dy, twoDyDx = 2 * (dy - dx);
     int x, y, xEnd;
-    // Determine which point to use as start, which as end
+
     if (xa > xb) {
         x = xb;
         y = yb;
         xEnd = xa;
-    }
-    else{
+    } else {
         x = xa;
         y = ya;
         xEnd = xb;
     }
-    arr[x][y]='.';
-    while (x < xEnd){
+
+    arr[x][y] = '.';
+    while (x < xEnd) {
         x++;
         if (p < 0)
             p += twoDy;
-        else{
+        else {
             y++;
             p += twoDyDx;
         }
-        arr[x][y]='.';
+        arr[x][y] = '.';
+    }
+    printf("Coordinates of marked points:\n");
+    for (int i = 0; i < 30; i++) {
+        for (int j = 0; j < 30; j++) {
+            if (arr[i][j] == '.')
+                printf("x = %d, y = %d\n", i, j);
+        }
     }
 }
